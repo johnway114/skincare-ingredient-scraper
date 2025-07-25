@@ -7,11 +7,12 @@ import argparse
 import sys
 from scrapers.ewg_scraper import EWGScraper
 from scrapers.sephora_scraper import SephoraScraper
+from scrapers.incidecoder_scraper import INCIDecoderScraper
 
 
 def main():
     parser = argparse.ArgumentParser(description='Skincare ingredient scraper')
-    parser.add_argument('scraper', choices=['ewg', 'sephora'], help='Which scraper to run')
+    parser.add_argument('scraper', choices=['ewg', 'sephora', 'incidecoder'], help='Which scraper to run')
     parser.add_argument('--limit', type=int, default=10, help='Number of products to scrape')
     parser.add_argument('--category', default='moisturizer', choices=['moisturizer', 'cleanser'], 
                        help='Product category to scrape')
@@ -26,16 +27,26 @@ def main():
     elif args.scraper == 'sephora':
         scraper = SephoraScraper(delay=max(args.delay, 3.0))  # Minimum 3s delay for Sephora
         scraper_name = 'Sephora'
+    elif args.scraper == 'incidecoder':
+        scraper = INCIDecoderScraper(delay=args.delay)
+        scraper_name = 'INCIDecoder'
     
     try:
-        print(f"Starting {scraper_name} scraper for {args.category} (limit: {args.limit})")
-        if args.scraper == 'sephora':
-            print("Note: Sephora scraping uses browser automation and may take longer")
-            
-        products = scraper.scrape_products(limit=args.limit, category=args.category)
+        if args.scraper == 'incidecoder':
+            print(f"Starting {scraper_name} scraper (limit: {args.limit})")
+            print("Note: INCIDecoder focuses on ingredient analysis, category filtering not supported")
+            products = scraper.scrape_products(limit=args.limit)
+        else:
+            print(f"Starting {scraper_name} scraper for {args.category} (limit: {args.limit})")
+            if args.scraper == 'sephora':
+                print("Note: Sephora scraping uses browser automation and may take longer")
+            products = scraper.scrape_products(limit=args.limit, category=args.category)
         
         if products:
-            output_name = args.output or f'{args.scraper}_{args.category}_{len(products)}_products'
+            if args.scraper == 'incidecoder':
+                output_name = args.output or f'{args.scraper}_{len(products)}_products'
+            else:
+                output_name = args.output or f'{args.scraper}_{args.category}_{len(products)}_products'
             scraper.save_data(products, output_name)
             print(f"Successfully scraped {len(products)} products")
             print(f"Data saved to: data/{output_name}.csv and data/{output_name}.json")

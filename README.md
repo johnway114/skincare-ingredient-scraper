@@ -93,6 +93,7 @@ python tests/test_ewg.py
 
 **Completed:**
 - EWG Skin Deep scraper (fully functional)
+- INCIDecoder scraper (fully functional)
 - Sephora scraper (implementation complete, blocked by anti-bot measures)
 - Base scraper framework with Selenium support
 - CSV/JSON export
@@ -100,12 +101,13 @@ python tests/test_ewg.py
 
 **Status:**
 - **EWG Skin Deep**: Working reliably, extracting product data and ingredients
+- **INCIDecoder**: Excellent performance, 50+ ingredients per product, includes ingredient lookup functionality
 - **Sephora**: Implemented but blocked by advanced anti-bot systems. Code structure ready for future access methods.
 
 **Planned:**
 - Amazon scraper
 - Premium brand scrapers  
-- Ingredient database scrapers (INCIDecoder, CosDNA)
+- CosDNA scraper
 - Beauty blog scrapers
 
 ## Dependencies
