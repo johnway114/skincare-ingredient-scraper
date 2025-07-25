@@ -8,11 +8,12 @@ import sys
 from scrapers.ewg_scraper import EWGScraper
 from scrapers.sephora_scraper import SephoraScraper
 from scrapers.incidecoder_scraper import INCIDecoderScraper
+from scrapers.cosdna_scraper import CosDNAScraper
 
 
 def main():
     parser = argparse.ArgumentParser(description='Skincare ingredient scraper')
-    parser.add_argument('scraper', choices=['ewg', 'sephora', 'incidecoder'], help='Which scraper to run')
+    parser.add_argument('scraper', choices=['ewg', 'sephora', 'incidecoder', 'cosdna'], help='Which scraper to run')
     parser.add_argument('--limit', type=int, default=10, help='Number of products to scrape')
     parser.add_argument('--category', default='moisturizer', choices=['moisturizer', 'cleanser'], 
                        help='Product category to scrape')
@@ -30,12 +31,20 @@ def main():
     elif args.scraper == 'incidecoder':
         scraper = INCIDecoderScraper(delay=args.delay)
         scraper_name = 'INCIDecoder'
+    elif args.scraper == 'cosdna':
+        scraper = CosDNAScraper(delay=max(args.delay, 3.0))  # Minimum 3s delay for CosDNA
+        scraper_name = 'CosDNA'
     
     try:
         if args.scraper == 'incidecoder':
             print(f"Starting {scraper_name} scraper (limit: {args.limit})")
             print("Note: INCIDecoder focuses on ingredient analysis, category filtering not supported")
             products = scraper.scrape_products(limit=args.limit)
+        elif args.scraper == 'cosdna':
+            print(f"Starting {scraper_name} scraper (limit: {args.limit})")
+            print("Note: CosDNA uses search queries, will search for facial products")
+            query = f"facial {args.category}" if args.category else "facial moisturizer"
+            products = scraper.scrape_products(limit=args.limit, query=query)
         else:
             print(f"Starting {scraper_name} scraper for {args.category} (limit: {args.limit})")
             if args.scraper == 'sephora':
@@ -45,6 +54,9 @@ def main():
         if products:
             if args.scraper == 'incidecoder':
                 output_name = args.output or f'{args.scraper}_{len(products)}_products'
+            elif args.scraper == 'cosdna':
+                query_safe = query.replace(' ', '_') if args.scraper == 'cosdna' else args.category
+                output_name = args.output or f'{args.scraper}_{query_safe}_{len(products)}_products'
             else:
                 output_name = args.output or f'{args.scraper}_{args.category}_{len(products)}_products'
             scraper.save_data(products, output_name)
