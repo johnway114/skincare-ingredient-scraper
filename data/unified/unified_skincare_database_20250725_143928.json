@@ -1,0 +1,85 @@
+[
+  {
+    "url": "https://www.cosdna.com/cht/product.php?q=facial%20moisturizer",
+    "source": "CosDNA",
+    "product_name": "化妝品搜尋",
+    "brand": "",
+    "price": "",
+    "rating": "",
+    "ingredients": [],
+    "date_published": "",
+    "hazard_score": "",
+    "file_source": "CosDNA",
+    "sources": [
+      "CosDNA"
+    ],
+    "all_urls": [
+      "https://www.cosdna.com/cht/product.php?q=facial%20moisturizer",
+      "https://www.cosdna.com/cht/product.php?q=facial%20moisturizer"
+    ],
+    "ingredient_count": 0,
+    "is_merged": true,
+    "merge_count": 2,
+    "data_sources": 1,
+    "product_type": "Other",
+    "data_quality_score": 25,
+    "contains_retinol": false,
+    "contains_hyaluronic_acid": false,
+    "contains_vitamin_c": false,
+    "contains_niacinamide": false,
+    "contains_aha_bha": false,
+    "processed_date": "2025-07-25T14:39:28.998360"
+  },
+  {
+    "url": "https://www.cosdna.com/chs/product.php?q=facial%20moisturizer",
+    "source": "CosDNA",
+    "product_name": "化妆品搜索",
+    "brand": "",
+    "price": "",
+    "rating": "",
+    "ingredients": [],
+    "date_published": "",
+    "hazard_score": "",
+    "file_source": "CosDNA",
+    "sources": [
+      "CosDNA"
+    ],
+    "all_urls": [
+      "https://www.cosdna.com/chs/product.php?q=facial%20moisturizer",
+      "https://www.cosdna.com/chs/product.php?q=facial%20moisturizer"
+    ],
+    "ingredient_count": 0,
+    "is_merged": true,
+    "merge_count": 2,
+    "data_sources": 1,
+    "product_type": "Other",
+    "data_quality_score": 25,
+    "contains_retinol": false,
+    "contains_hyaluronic_acid": false,
+    "contains_vitamin_c": false,
+    "contains_niacinamide": false,
+    "contains_aha_bha": false,
+    "processed_date": "2025-07-25T14:39:28.998372"
+  },
+  {
+    "url": "https://www.cosdna.com/jpn/product.php?q=facial%20moisturizer",
+    "source": "CosDNA",
+    "product_name": "化粧品検索",
+    "brand": "",
+    "price": "",
+    "rating": "",
+    "ingredients": [],
+    "date_published": "",
+    "hazard_score": "",
+    "file_source": "CosDNA",
+    "ingredient_count": 0,
+    "product_type": "Other",
+    "data_quality_score": 20,
+    "contains_retinol": false,
+    "contains_hyaluronic_acid": false,
+    "contains_vitamin_c": false,
+    "contains_niacinamide": false,
+    "contains_aha_bha": false,
+    "processed_date": "2025-07-25T14:39:28.998379"
+  }
+]

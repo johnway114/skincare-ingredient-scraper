@@ -1,0 +1,52 @@
+{
+  "merge_statistics": {
+    "files_processed": 4,
+    "total_products": 13,
+    "products_by_source": {
+      "EWG": 5,
+      "INCIDecoder": 3,
+      "CosDNA": 5
+    },
+    "unique_products": 11,
+    "total_ingredients": 80,
+    "unique_ingredients": 57,
+    "processing_time": "0:00:00.015684"
+  },
+  "deduplication_report": {
+    "total_products_processed": 13,
+    "duplicates_found": 2,
+    "unique_products": 11,
+    "merge_operations": 2,
+    "duplicate_rate": 15.384615384615385
+  },
+  "standardization_report": {
+    "total_ingredients_processed": 230,
+    "successfully_standardized": 159,
+    "standardization_rate": 69.1304347826087,
+    "new_mappings_created": 119,
+    "unmapped_ingredients": [
+      "Chlorphenesin.",
+      "C10-30 Alkyl Acrylate Crosspolymer Function",
+      "Sodium Benzoate",
+      "Copolymer",
+      "Histidine",
+      "Ppg-26-buteth-26",
+      "Urea",
+      "Sodium Gluconate",
+      "Cliganic Organic Neem",
+      "Peg-10 Phytosterol",
+      "Acrylates",
+      "Alanine",
+      "Benzyl Alcohol Function",
+      "Calendula Officinalis (pot Marigold) Flower Extract Function",
+      "Hydrolyzed Algae",
+      "Maltose",
+      "Copper Gluconate",
+      "Fructose",
+      "Sodium PCA",
+      "Polysorbate 60"
+    ],
+    "total_unmapped": 47
+  },
+  "timestamp": "2025-07-25T16:53:05.379064"
+}
