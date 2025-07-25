@@ -6,6 +6,9 @@ from abc import ABC, abstractmethod
 from typing import List, Dict, Optional
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
 import requests
@@ -37,16 +40,30 @@ class BaseScraper(ABC):
         """Setup Selenium WebDriver with appropriate options"""
         if not self.driver:
             options = Options()
+            
+            # Enhanced anti-detection measures
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             options.add_argument('--disable-dev-shm-usage')
+            options.add_argument('--disable-gpu')
+            options.add_argument('--window-size=1920,1080')
             options.add_argument(f'--user-agent={self.ua.random}')
             options.add_argument('--disable-blink-features=AutomationControlled')
+            options.add_argument('--disable-extensions')
+            options.add_argument('--disable-plugins')
+            options.add_argument('--disable-images')  # Faster loading
+            
+            # Additional anti-detection
+            options.add_experimental_option("excludeSwitches", ["enable-automation"])
+            options.add_experimental_option('useAutomationExtension', False)
             
             self.driver = webdriver.Chrome(
                 service=webdriver.chrome.service.Service(ChromeDriverManager().install()),
                 options=options
             )
+            
+            # Execute script to remove webdriver property
+            self.driver.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
     
     def setup_session(self):
         """Setup requests session with headers"""
