@@ -46,7 +46,17 @@ ingredient_scraper/
 
 ## Usage
 
-### EWG Skin Deep Scraper
+### Command Line Interface
+
+```bash
+# Scrape 50 moisturizers from EWG
+python main.py ewg --limit 50 --category moisturizer
+
+# Scrape cleansers with custom delay and output name
+python main.py ewg --limit 25 --category cleanser --delay 3.0 --output my_cleansers
+```
+
+### Programmatic Usage
 
 ```python
 from scrapers.ewg_scraper import EWGScraper
