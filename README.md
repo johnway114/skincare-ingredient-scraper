@@ -1,0 +1,110 @@
+# Skincare Ingredient Scraper
+
+A Python web scraper for extracting skincare product data and ingredient information from multiple online sources.
+
+## Purpose
+
+Scrapes facial moisturizers and cleansers to create datasets for analyzing ingredient trends, popularity, and effectiveness in skincare products.
+
+## Features
+
+- Multi-source scraping: EWG Skin Deep, Sephora, Amazon, premium brands, ingredient databases
+- Data extraction: Product names, brands, prices, ratings, ingredient lists, publication dates
+- Ingredient parsing: Filters marketing text, extracts actual ingredient names
+- Export formats: CSV and JSON
+- Error handling: Logging and graceful failures
+- Rate limiting: Configurable delays between requests
+
+## Project Structure
+
+```
+ingredient_scraper/
+├── scrapers/
+│   ├── __init__.py
+│   ├── base_scraper.py      # Base class with common functionality
+│   └── ewg_scraper.py       # EWG Skin Deep scraper
+├── tests/
+│   └── test_ewg.py          # Test suite for EWG scraper
+├── data/                    # Output directory for scraped data
+├── logs/                    # Scraper logs
+├── requirements.txt         # Python dependencies
+└── README.md
+```
+
+## Installation
+
+1. Create virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+
+### EWG Skin Deep Scraper
+
+```python
+from scrapers.ewg_scraper import EWGScraper
+
+scraper = EWGScraper(delay=2.0)
+
+try:
+    products = scraper.scrape_products(limit=50, category='moisturizer')
+    scraper.save_data(products, 'ewg_moisturizers')
+    print(f"Scraped {len(products)} products")
+finally:
+    scraper.close()
+```
+
+### Running Tests
+
+```bash
+python tests/test_ewg.py
+```
+
+## Data Fields
+
+- `product_name`: Product name
+- `brand`: Brand name
+- `price`: Product price
+- `rating`: Product rating/score
+- `ingredients`: List of ingredients
+- `url`: Source URL
+- `source`: Website name
+- `date_published`: Publication date
+- `hazard_score`: EWG hazard score (EWG only)
+
+## Implementation Status
+
+**Completed:**
+- EWG Skin Deep scraper
+- Base scraper framework
+- CSV/JSON export
+- Test suite
+
+**Planned:**
+- Sephora scraper
+- Amazon scraper
+- Premium brand scrapers
+- Ingredient database scrapers
+- Beauty blog scrapers
+
+## Dependencies
+
+- `requests`: HTTP requests
+- `beautifulsoup4`: HTML parsing
+- `selenium`: JavaScript-heavy sites
+- `pandas`: Data manipulation
+- `fake-useragent`: User agent rotation
+- `webdriver-manager`: ChromeDriver management
+
+## Notes
+
+- Implements rate limiting and respects robots.txt
+- Designed for research and analysis purposes
+- Handles dynamic content and anti-scraping measures
