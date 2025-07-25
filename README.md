@@ -54,6 +54,12 @@ python main.py ewg --limit 50 --category moisturizer
 
 # Scrape cleansers with custom delay and output name
 python main.py ewg --limit 25 --category cleanser --delay 3.0 --output my_cleansers
+
+# Scrape from INCIDecoder (ingredient database)
+python main.py incidecoder --limit 20
+
+# Scrape from CosDNA (cosmetic analysis database)
+python main.py cosdna --limit 15 --category cleanser
 ```
 
 ### Programmatic Usage
@@ -94,6 +100,7 @@ python tests/test_ewg.py
 **Completed:**
 - EWG Skin Deep scraper (fully functional)
 - INCIDecoder scraper (fully functional)
+- CosDNA scraper (fully functional)
 - Sephora scraper (implementation complete, blocked by anti-bot measures)
 - Base scraper framework with Selenium support
 - CSV/JSON export
@@ -102,12 +109,12 @@ python tests/test_ewg.py
 **Status:**
 - **EWG Skin Deep**: Working reliably, extracting product data and ingredients
 - **INCIDecoder**: Excellent performance, 50+ ingredients per product, includes ingredient lookup functionality
+- **CosDNA**: Implemented with search functionality and ingredient safety analysis capabilities
 - **Sephora**: Implemented but blocked by advanced anti-bot systems. Code structure ready for future access methods.
 
 **Planned:**
 - Amazon scraper
 - Premium brand scrapers  
-- CosDNA scraper
 - Beauty blog scrapers
 
 ## Dependencies
