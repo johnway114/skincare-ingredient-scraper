@@ -9,11 +9,12 @@ from scrapers.ewg_scraper import EWGScraper
 from scrapers.sephora_scraper import SephoraScraper
 from scrapers.incidecoder_scraper import INCIDecoderScraper
 from scrapers.cosdna_scraper import CosDNAScraper
+from scrapers.amazon_scraper import AmazonScraper
 
 
 def main():
     parser = argparse.ArgumentParser(description='Skincare ingredient scraper')
-    parser.add_argument('scraper', choices=['ewg', 'sephora', 'incidecoder', 'cosdna'], help='Which scraper to run')
+    parser.add_argument('scraper', choices=['ewg', 'sephora', 'incidecoder', 'cosdna', 'amazon'], help='Which scraper to run')
     parser.add_argument('--limit', type=int, default=10, help='Number of products to scrape')
     parser.add_argument('--category', default='moisturizer', choices=['moisturizer', 'cleanser'], 
                        help='Product category to scrape')
@@ -34,6 +35,9 @@ def main():
     elif args.scraper == 'cosdna':
         scraper = CosDNAScraper(delay=max(args.delay, 3.0))  # Minimum 3s delay for CosDNA
         scraper_name = 'CosDNA'
+    elif args.scraper == 'amazon':
+        scraper = AmazonScraper(delay=max(args.delay, 5.0))  # Minimum 5s delay for Amazon
+        scraper_name = 'Amazon'
     
     try:
         if args.scraper == 'incidecoder':
@@ -49,6 +53,9 @@ def main():
             print(f"Starting {scraper_name} scraper for {args.category} (limit: {args.limit})")
             if args.scraper == 'sephora':
                 print("Note: Sephora scraping uses browser automation and may take longer")
+            elif args.scraper == 'amazon':
+                print("Note: Amazon scraping uses browser automation and very slow delays due to anti-bot measures")
+                print("Warning: Amazon may block requests - use small limits and expect some failures")
             products = scraper.scrape_products(limit=args.limit, category=args.category)
         
         if products:
