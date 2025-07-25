@@ -1,6 +1,6 @@
 from typing import List, Dict, Optional
 import re
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin
 from .base_scraper import BaseScraper
 
 
